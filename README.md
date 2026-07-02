@@ -30,6 +30,21 @@ pi
 - `trust.json` : décisions de confiance propres aux chemins de la machine
 - `npm/`, `git/`, `bin/` : caches et installations recréables
 
+## Extensions et packages installés
+
+Docs Pi utiles : [packages](https://github.com/earendil-works/pi-coding-agent/blob/main/docs/packages.md), [extensions](https://github.com/earendil-works/pi-coding-agent/blob/main/docs/extensions.md), [skills](https://github.com/earendil-works/pi-coding-agent/blob/main/docs/skills.md).
+
+### Packages Pi
+
+Déclarés dans [`settings.json`](settings.json), installés/synchronisés avec `pi update --extensions`.
+
+- [`pi-web-access`](https://pi.dev/packages/pi-web-access) — accès web pour Pi : recherche web, récupération d'URL, lecture de PDF/vidéos selon les capacités du package.
+- [`@hypabolic/pi-hypa`](https://pi.dev/packages/@hypabolic/pi-hypa) — réduit le bruit des sorties d'outils/commandes pour économiser le contexte ; diagnostics via `/hypa`.
+
+### Extensions custom locales
+
+- [`extensions/gondolin-sandbox.ts`](extensions/gondolin-sandbox.ts) — mode optionnel `pisafe` : exécute les outils Pi dans une micro-VM Gondolin avec workspace monté dans `/workspace` et réseau contrôlé. Documentation : [docs/gondolin.md](docs/gondolin.md).
+
 ## Mode sandboxé Gondolin
 
 Ce repo contient une extension optionnelle pour lancer Pi dans une micro-VM Gondolin :

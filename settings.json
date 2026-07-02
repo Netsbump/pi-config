@@ -5,6 +5,7 @@
   "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "medium",
   "packages": [
-    "npm:pi-web-access@0.13.0"
+    "npm:pi-web-access@0.13.0",
+    "npm:@hypabolic/pi-hypa@0.1.6"
   ]
 }
