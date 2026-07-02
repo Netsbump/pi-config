@@ -3,7 +3,7 @@
 Ce setup ajoute une extension Pi locale :
 
 ```text
-extensions/gondolin-sandbox.ts
+optional-extensions/gondolin-sandbox.ts
 ```
 
 Elle sert à lancer Pi avec ses outils principaux dans une micro-VM Gondolin.
@@ -26,13 +26,13 @@ Ces commandes peuvent lire des fichiers, exfiltrer des tokens ou modifier ton sy
 Depuis un projet :
 
 ```bash
-pi -e ~/.pi/agent/extensions/gondolin-sandbox.ts
+pi -e ~/.pi/agent/optional-extensions/gondolin-sandbox.ts
 ```
 
 Alias pratique à mettre dans ton shell :
 
 ```bash
-alias pisafe='pi -e ~/.pi/agent/extensions/gondolin-sandbox.ts'
+alias pisafe='pi -e ~/.pi/agent/optional-extensions/gondolin-sandbox.ts'
 ```
 
 Puis :

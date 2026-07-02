@@ -45,7 +45,7 @@ Déclarés dans [`settings.json`](settings.json), installés/synchronisés avec 
 
 ### Extensions custom locales
 
-- [`extensions/gondolin-sandbox.ts`](extensions/gondolin-sandbox.ts) — mode optionnel `pisafe` : exécute les outils Pi dans une micro-VM Gondolin avec workspace monté dans `/workspace` et réseau contrôlé. Documentation : [docs/gondolin.md](docs/gondolin.md).
+- [`optional-extensions/gondolin-sandbox.ts`](optional-extensions/gondolin-sandbox.ts) — mode optionnel `pisafe` : exécute les outils Pi dans une micro-VM Gondolin avec workspace monté dans `/workspace` et réseau contrôlé. Documentation : [docs/gondolin.md](docs/gondolin.md).
 
 ## Notes
 
