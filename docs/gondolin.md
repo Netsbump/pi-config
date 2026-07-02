@@ -84,26 +84,6 @@ id_ed25519
 
 Ça protège contre les scripts qui tentent de lire des secrets locaux.
 
-### Est-ce que masquer `.env` peut casser le projet ?
-
-Oui, possible.
-
-C'est volontaire : par défaut, on préfère que le projet ne démarre pas plutôt que de donner les secrets à du code non fiable.
-
-Si tu as vraiment besoin d'exposer les `.env` à la VM pour un projet de confiance :
-
-```bash
-GONDOLIN_EXPOSE_ENV=1 pisafe
-```
-
-Pour exposer `.npmrc` :
-
-```bash
-GONDOLIN_EXPOSE_NPMRC=1 pisafe
-```
-
-À utiliser seulement quand tu sais ce que tu fais.
-
 ## `node_modules`
 
 L'extension cache le `node_modules` de l'hôte et permet à la VM de créer son propre `node_modules` en mémoire.
