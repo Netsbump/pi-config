@@ -45,22 +45,6 @@ Déclarés dans [`settings.json`](settings.json), installés/synchronisés avec 
 
 - [`extensions/gondolin-sandbox.ts`](extensions/gondolin-sandbox.ts) — mode optionnel `pisafe` : exécute les outils Pi dans une micro-VM Gondolin avec workspace monté dans `/workspace` et réseau contrôlé. Documentation : [docs/gondolin.md](docs/gondolin.md).
 
-## Mode sandboxé Gondolin
-
-Ce repo contient une extension optionnelle pour lancer Pi dans une micro-VM Gondolin :
-
-```bash
-pi -e ~/.pi/agent/extensions/gondolin-sandbox.ts
-```
-
-Alias conseillé :
-
-```bash
-alias pisafe='pi -e ~/.pi/agent/extensions/gondolin-sandbox.ts'
-```
-
-Documentation détaillée : [docs/gondolin.md](docs/gondolin.md)
-
 ## Notes
 
 Les extensions/packages Pi peuvent exécuter du code localement. Ne garder ici que des packages de confiance.
