@@ -52,7 +52,18 @@ Déclarés dans [`settings.json`](settings.json), installés/synchronisés avec 
 
 ### Extensions custom locales
 
+- [`extensions/preset.ts`](extensions/preset.ts) — ajoute des presets façon modes OpenCode. Configuration dans [`presets.json`](presets.json). Commandes utiles : `/preset`, `/preset plan`, `/preset build`, `/preset review`. Raccourci : `Ctrl+Shift+U`. Démarrage direct possible avec `pi --preset plan`.
 - [`optional-extensions/gondolin-sandbox.ts`](optional-extensions/gondolin-sandbox.ts) — mode optionnel `pisafe` : exécute les outils Pi dans une micro-VM Gondolin avec workspace monté dans `/workspace` et réseau contrôlé. Documentation : [docs/gondolin.md](docs/gondolin.md).
+
+### Presets disponibles
+
+Définis dans [`presets.json`](presets.json) :
+
+- `plan` — exploration read-only, réflexion haute, pas de modification de fichiers.
+- `build` — implémentation ciblée avec édition autorisée et checks/tests pertinents.
+- `review` — relecture de diff/code sans modification sauf demande explicite.
+
+Après modification des presets ou de l'extension, utiliser `/reload` dans Pi ou redémarrer la session.
 
 ## Notes
 

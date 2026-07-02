@@ -29,6 +29,7 @@ yarn.lock
 /logs/
 /tmp/
 *.log
+catppuccin-tui-state.json
 
 # OS/editor noise
 .DS_Store
