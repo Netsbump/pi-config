@@ -41,6 +41,7 @@ Déclarés dans [`settings.json`](settings.json), installés/synchronisés avec 
 - [`pi-web-access`](https://pi.dev/packages/pi-web-access) — accès web pour Pi : recherche web, récupération d'URL, lecture de PDF/vidéos selon les capacités du package.
 - [`@hypabolic/pi-hypa`](https://pi.dev/packages/@hypabolic/pi-hypa) — réduit le bruit des sorties d'outils/commandes pour économiser le contexte ; diagnostics via `/hypa`.
 - [`@plannotator/pi-extension`](https://pi.dev/packages/@plannotator/pi-extension) — ajoute un mode plan/review : `pi --plan`, `/plannotator`, validation de plans dans une UI navigateur, review/annotation de diffs et messages.
+- [`pi-catppuccin-tui`](https://pi.dev/packages/pi-catppuccin-tui?type=theme) — thèmes Catppuccin pour Pi (`latte`, `frappe`, `macchiato`, `mocha`) et améliorations TUI optionnelles via `/catppuccin-tui`.
 
 ### Extensions custom locales
 
