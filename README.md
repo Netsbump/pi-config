@@ -18,6 +18,11 @@ npm install
 # Installer / synchroniser les packages déclarés dans settings.json
 pi update --extensions
 
+# Installer et démarrer Pi Web si l'UI navigateur est souhaitée
+pi-web install
+pi-web doctor
+# puis ouvrir http://127.0.0.1:8504
+
 # Se reconnecter au provider sur cette machine
 pi
 # puis /login si nécessaire
@@ -29,6 +34,7 @@ pi
 - `sessions/` : historique des conversations
 - `trust.json` : décisions de confiance propres aux chemins de la machine
 - `npm/`, `git/`, `bin/` : caches et installations recréables
+- `~/.config/pi-web/config.json` : configuration runtime locale de Pi Web, propre à chaque machine
 
 ## Extensions et packages installés
 
@@ -42,6 +48,7 @@ Déclarés dans [`settings.json`](settings.json), installés/synchronisés avec 
 - [`@hypabolic/pi-hypa`](https://pi.dev/packages/@hypabolic/pi-hypa) — réduit le bruit des sorties d'outils/commandes pour économiser le contexte ; diagnostics via `/hypa`.
 - [`@plannotator/pi-extension`](https://pi.dev/packages/@plannotator/pi-extension) — ajoute un mode plan/review : `pi --plan`, `/plannotator`, validation de plans dans une UI navigateur, review/annotation de diffs et messages.
 - [`pi-catppuccin-tui`](https://pi.dev/packages/pi-catppuccin-tui?type=theme) — thèmes Catppuccin pour Pi (`latte`, `frappe`, `macchiato`, `mocha`) et améliorations TUI optionnelles via `/catppuccin-tui`.
+- [`@jmfederico/pi-web`](https://pi.dev/packages/@jmfederico/pi-web?name=pi-web) — UI web locale pour Pi : projets, workspaces/git worktrees, sessions persistantes, fichiers, terminaux et supervision multi-sessions depuis le navigateur. Documentation locale : [docs/pi-web.md](docs/pi-web.md).
 
 ### Extensions custom locales
 
