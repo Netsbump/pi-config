@@ -1,0 +1,38 @@
+# Secrets / authentication
+/auth.json
+/auth*.json
+*.key
+*.pem
+*.token
+*.secret
+.env
+.env.*
+!.env.example
+
+# Sessions / history (can contain prompts, code, secrets)
+/sessions/
+*.jsonl
+
+# Trust decisions are machine/path-specific
+/trust.json
+
+# Installed package caches / dependencies (recreated from settings.json)
+/npm/
+/git/
+/node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Local binaries/cache/logs
+/bin/
+/cache/
+/logs/
+/tmp/
+*.log
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
