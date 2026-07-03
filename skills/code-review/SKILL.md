@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Structured PR/branch review of changes since a fixed point along two axes: Standards and Spec. Use when the user wants to review a PR, branch, work-in-progress changes, or asks to review since a commit/branch/tag.
+description: "Structured PR/branch review of changes since a fixed point along two axes: Standards and Spec. Use when the user wants to review a PR, branch, work-in-progress changes, or asks to review since a commit/branch/tag."
 ---
 
 # Code Review Skill
