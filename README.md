@@ -28,6 +28,16 @@ pi
 # puis /login si nécessaire
 ```
 
+## Mise à jour sur une machine existante
+
+Depuis n'importe où :
+
+```bash
+cd ~/.pi/agent && npm run sync
+```
+
+La commande fait : `git pull --ff-only`, `npm ci`, puis `pi update --all` pour mettre à jour Pi et les packages/extensions déclarés.
+
 ## Ce qui est volontairement exclu
 
 - `auth.json` : tokens / sessions d'authentification

@@ -2,6 +2,9 @@
   "name": "netsbump-pi-config",
   "private": true,
   "type": "module",
+  "scripts": {
+    "sync": "git pull --ff-only && npm ci && pi update --all"
+  },
   "dependencies": {
     "@earendil-works/gondolin": "0.12.0",
     "@earendil-works/pi-coding-agent": "0.80.3"
