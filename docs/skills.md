@@ -42,6 +42,18 @@ Génère un document de handoff pour reprendre le travail dans une session fraî
 /skill:handoff continuer la config des presets Pi
 ```
 
+### `commit-message`
+
+Génère un message de commit en anglais à partir du diff Git staged.
+
+- Lit uniquement les changements staged (`git diff --cached`).
+- Utilise les conventions `feat`, `fix`, `refactor`, `chore`, etc.
+- Ne fait jamais le commit ; retourne seulement un message prêt à copier/coller.
+
+```text
+/skill:commit-message
+```
+
 ## Skills fournis par des extensions
 
 ### `librarian`
