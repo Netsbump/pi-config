@@ -28,6 +28,7 @@ yarn.lock
 /cache/
 /logs/
 /tmp/
+/intercom/broker.*
 *.log
 catppuccin-tui-state.json
 
