@@ -30,7 +30,6 @@ yarn.lock
 /tmp/
 /intercom/broker.*
 *.log
-catppuccin-tui-state.json
 
 # OS/editor noise
 .DS_Store
