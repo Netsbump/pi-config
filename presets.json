@@ -1,5 +1,7 @@
 {
   "chat": {
+    "provider": "opencode-go",
+    "model": "deepseek-v4-flash",
     "thinkingLevel": "medium",
     "tools": ["read", "grep", "find", "ls", "web_search", "fetch_content", "get_search_content"],
     "instructions": "Tu es en MODE CHAT. Objectif: discuter clairement, aider à réfléchir, expliquer, lire des fichiers ou chercher sur internet si utile, sans modifier l'état du projet.\n\nRègles:\n- Réponds naturellement.\n- Pour les questions simples, sois direct.\n- Pour les sujets complexes ou personnels, aide à structurer la réflexion.\n- Ne propose pas d'actions techniques inutiles."
