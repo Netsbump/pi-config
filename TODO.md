@@ -23,6 +23,5 @@ Ne pas le mélanger directement avec chaque subagent au début. Décider plus ta
 
 ### Ajuster les modèles
 
-- [ ] Choisir un modèle économique pour `chat`.
 - [ ] Éventuellement pin `oracle`/`worker` sur un modèle fort.
 - [ ] Éventuellement pin `scout` sur un modèle rapide/cheap.

@@ -1,5 +1,4 @@
 import path from "node:path";
-
 import type {
   ExtensionAPI,
   ExtensionContext,
@@ -14,7 +13,6 @@ import {
   type ReadOperations,
   type WriteOperations,
 } from "@earendil-works/pi-coding-agent";
-
 import {
   createHttpHooks,
   MemoryProvider,
@@ -48,15 +46,23 @@ function toGuestPath(localCwd: string, localPath: string): string {
   if (rel.startsWith("..") || path.isAbsolute(rel)) {
     throw new Error(`path escapes workspace: ${localPath}`);
   }
-  return path.posix.join(GUEST_WORKSPACE, rel.split(path.sep).join(path.posix.sep));
+  return path.posix.join(
+    GUEST_WORKSPACE,
+    rel.split(path.sep).join(path.posix.sep),
+  );
 }
 
 function isSensitivePath(vfsPath: string) {
-  const normalized = path.posix.normalize(vfsPath.startsWith("/") ? vfsPath : `/${vfsPath}`);
+  const normalized = path.posix.normalize(
+    vfsPath.startsWith("/") ? vfsPath : `/${vfsPath}`,
+  );
   const parts = normalized.split("/").filter(Boolean);
   const base = parts.at(-1) ?? "";
 
-  if (!enabled("GONDOLIN_EXPOSE_ENV") && (base === ".env" || base.startsWith(".env."))) {
+  if (
+    !enabled("GONDOLIN_EXPOSE_ENV") &&
+    (base === ".env" || base.startsWith(".env."))
+  ) {
     return true;
   }
 
@@ -120,14 +126,24 @@ function createGondolinReadOps(vm: VM, localCwd: string): ReadOperations {
     },
     access: async (p) => {
       const guestPath = toGuestPath(localCwd, p);
-      const r = await vm.exec(["/bin/sh", "-lc", `test -r ${shQuote(guestPath)}`]);
+      const r = await vm.exec([
+        "/bin/sh",
+        "-lc",
+        `test -r ${shQuote(guestPath)}`,
+      ]);
       if (!r.ok) throw new Error(`not readable: ${p}`);
     },
     detectImageMimeType: async (p) => {
       const guestPath = toGuestPath(localCwd, p);
-      const r = await vm.exec(["/bin/sh", "-lc", `file --mime-type -b ${shQuote(guestPath)} 2>/dev/null || true`]);
+      const r = await vm.exec([
+        "/bin/sh",
+        "-lc",
+        `file --mime-type -b ${shQuote(guestPath)} 2>/dev/null || true`,
+      ]);
       const mime = r.stdout.trim();
-      return ["image/jpeg", "image/png", "image/gif", "image/webp"].includes(mime)
+      return ["image/jpeg", "image/png", "image/gif", "image/webp"].includes(
+        mime,
+      )
         ? mime
         : null;
     },
@@ -140,7 +156,11 @@ function createGondolinWriteOps(vm: VM, localCwd: string): WriteOperations {
       const guestPath = toGuestPath(localCwd, p);
       const dir = path.posix.dirname(guestPath);
       const b64 = Buffer.from(content, "utf8").toString("base64");
-      const script = [`set -eu`, `mkdir -p ${shQuote(dir)}`, `printf %s ${shQuote(b64)} | base64 -d > ${shQuote(guestPath)}`].join("\n");
+      const script = [
+        `set -eu`,
+        `mkdir -p ${shQuote(dir)}`,
+        `printf %s ${shQuote(b64)} | base64 -d > ${shQuote(guestPath)}`,
+      ].join("\n");
       const r = await vm.exec(["/bin/sh", "-lc", script]);
       if (!r.ok) throw new Error(`write failed (${r.exitCode}): ${r.stderr}`);
     },
@@ -158,11 +178,16 @@ function createGondolinEditOps(vm: VM, localCwd: string): EditOperations {
   return { readFile: r.readFile, access: r.access, writeFile: w.writeFile };
 }
 
-function sanitizeEnv(env?: NodeJS.ProcessEnv): Record<string, string> | undefined {
+function sanitizeEnv(
+  env?: NodeJS.ProcessEnv,
+): Record<string, string> | undefined {
   if (!env) return undefined;
   const out: Record<string, string> = {};
   for (const [k, v] of Object.entries(env)) {
-    if (typeof v === "string" && !/(TOKEN|SECRET|PASSWORD|PASS|KEY|CREDENTIAL)/i.test(k)) {
+    if (
+      typeof v === "string" &&
+      !/(TOKEN|SECRET|PASSWORD|PASS|KEY|CREDENTIAL)/i.test(k)
+    ) {
       out[k] = v;
     }
   }
@@ -178,12 +203,13 @@ function createGondolinBashOps(vm: VM, localCwd: string): BashOperations {
       signal?.addEventListener("abort", onAbort, { once: true });
 
       let timedOut = false;
-      const timer = timeout && timeout > 0
-        ? setTimeout(() => {
-            timedOut = true;
-            ac.abort();
-          }, timeout * 1000)
-        : undefined;
+      const timer =
+        timeout && timeout > 0
+          ? setTimeout(() => {
+              timedOut = true;
+              ac.abort();
+            }, timeout * 1000)
+          : undefined;
 
       try {
         const proc = vm.exec(["/bin/sh", "-lc", command], {
@@ -231,7 +257,10 @@ export default function (pi: ExtensionAPI) {
     if (vmStarting) return vmStarting;
 
     vmStarting = (async () => {
-      ctx?.ui.setStatus("gondolin", ctx.ui.theme.fg("accent", "Gondolin: starting"));
+      ctx?.ui.setStatus(
+        "gondolin",
+        ctx.ui.theme.fg("accent", "Gondolin: starting"),
+      );
       const created = await VM.create({
         httpHooks,
         env,
@@ -244,9 +273,15 @@ export default function (pi: ExtensionAPI) {
       vm = created;
       ctx?.ui.setStatus(
         "gondolin",
-        ctx.ui.theme.fg("accent", `Gondolin: ${localCwd} -> ${GUEST_WORKSPACE}; net=${allowedHosts.length ? allowedHosts.join(",") : "deny"}`),
+        ctx.ui.theme.fg(
+          "accent",
+          `Gondolin: ${localCwd} -> ${GUEST_WORKSPACE}; net=${allowedHosts.length ? allowedHosts.join(",") : "deny"}`,
+        ),
       );
-      ctx?.ui.notify(`Gondolin VM ready. Workspace: ${GUEST_WORKSPACE}. Network: ${allowedHosts.length ? allowedHosts.join(", ") : "denied"}.`, "info");
+      ctx?.ui.notify(
+        `Gondolin VM ready. Workspace: ${GUEST_WORKSPACE}. Network: ${allowedHosts.length ? allowedHosts.join(", ") : "denied"}.`,
+        "info",
+      );
       return created;
     })();
 
@@ -259,7 +294,10 @@ export default function (pi: ExtensionAPI) {
 
   pi.on("session_shutdown", async (_event, ctx) => {
     if (!vm) return;
-    ctx.ui.setStatus("gondolin", ctx.ui.theme.fg("muted", "Gondolin: stopping"));
+    ctx.ui.setStatus(
+      "gondolin",
+      ctx.ui.theme.fg("muted", "Gondolin: stopping"),
+    );
     try {
       await vm.close();
     } finally {
@@ -272,7 +310,9 @@ export default function (pi: ExtensionAPI) {
     ...localRead,
     async execute(id, params, signal, onUpdate, ctx) {
       const activeVm = await ensureVm(ctx);
-      return createReadTool(localCwd, { operations: createGondolinReadOps(activeVm, localCwd) }).execute(id, params, signal, onUpdate);
+      return createReadTool(localCwd, {
+        operations: createGondolinReadOps(activeVm, localCwd),
+      }).execute(id, params, signal, onUpdate);
     },
   });
 
@@ -280,7 +320,9 @@ export default function (pi: ExtensionAPI) {
     ...localWrite,
     async execute(id, params, signal, onUpdate, ctx) {
       const activeVm = await ensureVm(ctx);
-      return createWriteTool(localCwd, { operations: createGondolinWriteOps(activeVm, localCwd) }).execute(id, params, signal, onUpdate);
+      return createWriteTool(localCwd, {
+        operations: createGondolinWriteOps(activeVm, localCwd),
+      }).execute(id, params, signal, onUpdate);
     },
   });
 
@@ -288,7 +330,9 @@ export default function (pi: ExtensionAPI) {
     ...localEdit,
     async execute(id, params, signal, onUpdate, ctx) {
       const activeVm = await ensureVm(ctx);
-      return createEditTool(localCwd, { operations: createGondolinEditOps(activeVm, localCwd) }).execute(id, params, signal, onUpdate);
+      return createEditTool(localCwd, {
+        operations: createGondolinEditOps(activeVm, localCwd),
+      }).execute(id, params, signal, onUpdate);
     },
   });
 
@@ -296,7 +340,9 @@ export default function (pi: ExtensionAPI) {
     ...localBash,
     async execute(id, params, signal, onUpdate, ctx) {
       const activeVm = await ensureVm(ctx);
-      return createBashTool(localCwd, { operations: createGondolinBashOps(activeVm, localCwd) }).execute(id, params, signal, onUpdate);
+      return createBashTool(localCwd, {
+        operations: createGondolinBashOps(activeVm, localCwd),
+      }).execute(id, params, signal, onUpdate);
     },
   });
 
