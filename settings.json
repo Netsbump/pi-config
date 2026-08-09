@@ -1,9 +1,9 @@
 {
   "lastChangelogVersion": "0.80.3",
-  "theme": "Modern Vesper",
+  "theme": "catppuccin-tui-mocha",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "medium",
+  "defaultThinkingLevel": "high",
   "packages": [
     "npm:pi-web-access@0.13.0",
     "npm:@hypabolic/pi-hypa@0.1.6",
@@ -11,7 +11,8 @@
     "npm:@jmfederico/pi-web",
     "npm:pi-subagents",
     "npm:pi-intercom",
-    "npm:pi-prompt-template-model"
+    "npm:pi-prompt-template-model",
+    "npm:pi-catppuccin-tui"
   ],
   "subagents": {
     "agentOverrides": {
