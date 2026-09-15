@@ -11,7 +11,11 @@
 
 # Sessions / history (can contain prompts, code, secrets)
 /sessions/
+/missions/
 *.jsonl
+
+# Pi-generated model catalog cache
+/models-store.json
 
 # Trust decisions are machine/path-specific
 /trust.json
@@ -28,7 +32,6 @@ yarn.lock
 /cache/
 /logs/
 /tmp/
-/intercom/broker.*
 *.log
 
 # OS/editor noise

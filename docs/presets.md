@@ -4,7 +4,6 @@ Définis dans [`../presets.json`](../presets.json). Les presets changent le mode
 
 Commandes utiles : `/preset`. 
 Raccourci : `Ctrl+Shift+U`. 
-Démarrage direct possible avec `pi --preset scope`.
 
 ## `chat`
 
@@ -16,20 +15,6 @@ Mode discussion / explication.
 
 ```text
 /preset chat
-```
-
-## `scope`
-
-Mode dev quotidien / orchestration.
-
-- Outils directs : lecture, recherche locale, `bash` en lecture/inspection, web.
-- Pas de `edit/write` direct.
-- Peut déléguer à `scout`, `planner`, `reviewer`, `oracle`.
-- Peut appeler `worker` seulement après validation explicite d'implémentation par l'utilisateur.
-- Usage typique : comprendre un problème, explorer un codebase, proposer une approche, identifier risques et questions, puis déléguer l'implémentation validée.
-
-```text
-/preset scope
 ```
 
 Après modification des presets ou de l'extension, utiliser `/reload` dans Pi ou redémarrer la session.

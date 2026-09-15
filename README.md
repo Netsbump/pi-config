@@ -1,6 +1,4 @@
-# Configuration Pi personnelle
-
-Ce dépôt contient ma configuration Pi partageable entre machines.
+# Configuration Pi
 
 ## Installation sur une nouvelle machine
 
@@ -10,7 +8,7 @@ pnpm add -g @earendil-works/pi-coding-agent
 
 # Cloner ce dépôt comme config Pi
 rm -rf ~/.pi/agent
-git clone <URL_DU_REPO_PRIVE> ~/.pi/agent
+git clone https://github.com/Netsbump/pi-config.git ~/.pi/agent
 
 # Installer les dépendances locales de ce repo
 npm install
@@ -42,6 +40,8 @@ La commande fait : `git pull --ff-only`, `npm ci`, puis `pi update --all` pour m
 
 - `auth.json` : tokens / sessions d'authentification
 - `sessions/` : historique des conversations
+- `missions/` : état des missions temporaires
+- `models-store.json` : cache local du catalogue de modèles
 - `trust.json` : décisions de confiance propres aux chemins de la machine
 - `npm/`, `git/`, `bin/` : caches et installations recréables
 - `~/.config/pi-web/config.json` : configuration runtime locale de Pi Web, propre à chaque machine
@@ -58,9 +58,7 @@ Déclarés dans [`settings.json`](settings.json), installés/synchronisés avec 
 - [`@hypabolic/pi-hypa`](https://pi.dev/packages/@hypabolic/pi-hypa) — réduit le bruit des sorties d'outils/commandes pour économiser le contexte ; diagnostics via `/hypa`.
 - [`@plannotator/pi-extension`](https://pi.dev/packages/@plannotator/pi-extension) — workflow plan/review : `pi --plan`, `/plannotator`, validation de plans dans une UI navigateur, review/annotation de diffs et messages.
 - [`@jmfederico/pi-web`](https://pi.dev/packages/@jmfederico/pi-web?name=pi-web) — UI web locale pour Pi : projets, workspaces/git worktrees, sessions persistantes, fichiers, terminaux et supervision multi-sessions depuis le navigateur. Documentation locale : [docs/pi-web.md](docs/pi-web.md).
-- [`pi-subagents`](https://pi.dev/packages/pi-subagents) — délégation à des agents enfants spécialisés (`scout`, `planner`, `worker`, `reviewer`, `oracle`, etc.). Configuration globale dans [`settings.json`](settings.json), section `subagents`. Notes locales : [docs/subagents.md](docs/subagents.md).
-- [`pi-intercom`](https://pi.dev/packages/pi-intercom) — canal de coordination parent ↔ subagents pour décisions live, progress updates et remontée groupée des résultats.
-- [`pi-prompt-template-model`](https://pi.dev/packages/pi-prompt-template-model) — prompt templates réutilisables avec frontmatter `model`, `thinking`, `skill`, `subagent`, `inheritContext`, etc.
+- [`pi-prompt-template-model`](https://pi.dev/packages/pi-prompt-template-model) — prompt templates réutilisables avec frontmatter `model`, `thinking`, `skill`, etc.
 
 ### Extensions custom locales
 
@@ -75,20 +73,9 @@ Documentation : [docs/gondolin.md](docs/gondolin.md).
 - [`skills/`](skills/) — workflows spécialisés à invoquer ponctuellement.
 Documentation : [docs/skills.md](docs/skills.md).
 
-## Subagents
-
-- [`pi-subagents`](https://pi.dev/packages/pi-subagents) — délégation à des agents enfants spécialisés, configurée globalement dans [`settings.json`](settings.json).
-Documentation : [docs/subagents.md](docs/subagents.md).
-
 ## Flow recommandé
 
-### Cadrage puis implémentation
-
-```text
-/preset scope
-```
-
-Discuter, explorer, cadrer, éventuellement avec `scout`, `planner`, `reviewer` ou `oracle`.
+### Réflexion et planification
 
 ```text
 /skill:grill-me
@@ -102,12 +89,6 @@ Challenger l'approche si nécessaire.
 
 Créer/revoir un plan si le changement mérite un workflow plus structuré.
 
-```text
-Demande explicite depuis scope : Ok, implémente ce plan avec worker.
-```
-
-Implémenter après validation via le subagent `worker`.
-
 ### Review
 
 ```text
@@ -119,7 +100,3 @@ ou utiliser la review visuelle Plannotator :
 ```text
 /plannotator-review
 ```
-
-## Notes
-
-Les extensions/packages Pi peuvent exécuter du code localement. Ne garder ici que des packages de confiance.
